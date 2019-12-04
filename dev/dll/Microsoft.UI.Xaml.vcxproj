@@ -173,6 +173,9 @@
   <PropertyGroup Condition="'$(Configuration)'=='Debug' AND '$(TFBUILD)'=='True'">
     <RunCodeAnalysis>true</RunCodeAnalysis>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(IsTDPConfiguration)'=='true'">
+    <RunCodeAnalysis>true</RunCodeAnalysis>
+  </PropertyGroup>
   <PropertyGroup>
     <CodeAnalysisTreatWarningsAsErrors>true</CodeAnalysisTreatWarningsAsErrors>
     <CodeAnalysisRuleSet>..\..\build\PrefastWarnings.ruleset</CodeAnalysisRuleSet>
