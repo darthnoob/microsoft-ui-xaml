@@ -143,8 +143,7 @@
     <Import Project="..\NumberBox\NumberBox.vcxitems" Label="Shared" Condition="$(FeatureNumberBoxEnabled) == 'true' Or $(FeatureNumberBoxEnabled) == 'productOnly'" />
   </ImportGroup>
   <ItemGroup>
-    <SharedPage Include="@(Page)" />
-    <SharedPage Include="@(XamlPage)" />
+    <SharedPage Include="@(Page);@(XamlPage)" />
   </ItemGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
