@@ -69,6 +69,13 @@
       <IsPublic>true</IsPublic>
       <IncludeInWindowsAppx>true</IncludeInWindowsAppx>
     </Page>
+    <XamlPage>
+      <Version>Undefined</Version>
+      <Type>Undefined</Type>
+      <Priority>Undefined</Priority>
+      <IsPublic>true</IsPublic>
+      <IncludeInWindowsAppx>true</IncludeInWindowsAppx>
+    </XamlPage>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup>
     <PRIResource>
@@ -137,6 +144,7 @@
   </ImportGroup>
   <ItemGroup>
     <SharedPage Include="@(Page)" />
+    <SharedPage Include="@(XamlPage)" />
   </ItemGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
@@ -166,8 +174,14 @@
     <GenerateManifest>false</GenerateManifest>
     <IgnoreImportLibrary>false</IgnoreImportLibrary>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)'=='Release'">
+  <!-- Run code analysis either locally (!TFBUILD) in Release or in pipeline builds in Debug. -->
+  <PropertyGroup Condition="'$(Configuration)'=='Release' AND '$(TFBUILD)'!='True'">
     <RunCodeAnalysis>true</RunCodeAnalysis>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)'=='Debug' AND '$(TFBUILD)'=='True'">
+    <RunCodeAnalysis>true</RunCodeAnalysis>
+  </PropertyGroup>
+  <PropertyGroup>
     <CodeAnalysisTreatWarningsAsErrors>true</CodeAnalysisTreatWarningsAsErrors>
     <CodeAnalysisRuleSet>..\..\build\PrefastWarnings.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>

@@ -219,7 +219,7 @@ inline HRESULT STDMETHODCALLTYPE CppWinRTCreateActivationFactory(_In_ unsigned i
     WrlCreatorMapIncludePragma(className)
 
 #pragma warning(push)
-#pragma warning(disable : 26812) // Disable Enum.3 here, it fires at usage sites instead of declaration sites and we can't resolve it.
+//#pragma warning(disable : 26812) // Disable Enum.3 here, it fires at usage sites instead of declaration sites and we can't resolve it.
 
 namespace CppWinRTTemp
 {

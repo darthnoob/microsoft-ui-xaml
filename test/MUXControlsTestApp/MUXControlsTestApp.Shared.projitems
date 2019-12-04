@@ -144,6 +144,7 @@
   <Import Project="$(MSBuildThisFileDirectory)\..\..\dev\**\*.vcxitems" />
   <ItemGroup>
     <PageToTest Include="@(Page)" />
+    <PageToTest Include="@(XamlPage)" />
   </ItemGroup>
   <ItemGroup Condition="$(BuildingWithBuildExe) != 'true'">
     <ProjectReference Include="$(MSBuildThisFileDirectory)\..\..\dev\dll\Microsoft.UI.Xaml.vcxproj">
