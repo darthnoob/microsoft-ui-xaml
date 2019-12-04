@@ -170,10 +170,7 @@
   <PropertyGroup Condition="'$(Configuration)'=='Release' AND '$(TFBUILD)'!='True'">
     <RunCodeAnalysis>true</RunCodeAnalysis>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)'=='Debug' AND '$(TFBUILD)'=='True'">
-    <RunCodeAnalysis>true</RunCodeAnalysis>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(IsTDPConfiguration)'=='true'">
+  <PropertyGroup Condition="'$(Configuration)'=='Debug'">
     <RunCodeAnalysis>true</RunCodeAnalysis>
   </PropertyGroup>
   <PropertyGroup>
