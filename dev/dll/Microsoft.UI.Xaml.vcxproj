@@ -69,13 +69,6 @@
       <IsPublic>true</IsPublic>
       <IncludeInWindowsAppx>true</IncludeInWindowsAppx>
     </Page>
-    <XamlPage>
-      <Version>Undefined</Version>
-      <Type>Undefined</Type>
-      <Priority>Undefined</Priority>
-      <IsPublic>true</IsPublic>
-      <IncludeInWindowsAppx>true</IncludeInWindowsAppx>
-    </XamlPage>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup>
     <PRIResource>
@@ -143,7 +136,7 @@
     <Import Project="..\NumberBox\NumberBox.vcxitems" Label="Shared" Condition="$(FeatureNumberBoxEnabled) == 'true' Or $(FeatureNumberBoxEnabled) == 'productOnly'" />
   </ImportGroup>
   <ItemGroup>
-    <SharedPage Include="@(Page);@(XamlPage)" />
+    <SharedPage Include="@(Page)" />
   </ItemGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
@@ -249,6 +242,12 @@
       <PreprocessorDefinitions>DISABLE_WINRT_DEPRECATION;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Optimization Condition="'$(Configuration)'=='Release'">MinSpace</Optimization>
       <ConformanceMode>true</ConformanceMode>
+      <!-- Pipelines agents are low-memory configurations that struggle to compile code analysis in parallel. See 
+          https://developercommunity.visualstudio.com/content/problem/831568/cl-analyze-runs-out-of-memory.html
+          for more details. While we get that resolved (either with a fix in VS or better agents), we need
+          to disable MultiProc compile. Use NUMBER_OF_PROCESSORS==2 to check if it's one of the underpowered Azure
+          Pipelines VMs -->
+      <MultiProcessorCompilation Condition="'$(Configuration)'=='Debug' AND '$(NUMBER_OF_PROCESSORS)'=='2'">false</MultiProcessorCompilation>
     </ClCompile>
   </ItemDefinitionGroup>
   <ItemGroup>
