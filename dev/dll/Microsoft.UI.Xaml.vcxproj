@@ -166,11 +166,12 @@
     <GenerateManifest>false</GenerateManifest>
     <IgnoreImportLibrary>false</IgnoreImportLibrary>
   </PropertyGroup>
-  <!-- Run code analysis either locally (!TFBUILD) in Release or in pipeline builds in Debug. -->
-  <PropertyGroup Condition="'$(Configuration)'=='Release' AND '$(TF_BUILD)'!='1'">
-    <RunCodeAnalysis>true</RunCodeAnalysis>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)'=='Debug'">
+  <!-- Run code analysis: Release (locally only) -OR- Debug (pipeline only) -OR- Debug Intellisense -->
+  <PropertyGroup Condition="
+    ('$(Configuration)'=='Release' AND '$(TF_BUILD)'!='True') OR
+    ('$(Configuration)'=='Debug' AND '$(TF_BUILD)'=='True') OR
+    ('$(Configuration)'=='Debug' AND '$(IntelliSenseBuild)'=='1')
+    ">
     <RunCodeAnalysis>true</RunCodeAnalysis>
   </PropertyGroup>
   <PropertyGroup>
